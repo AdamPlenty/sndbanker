@@ -84,10 +84,10 @@ std::string file_name_change_extension(const std::string &fname_inp, const std::
  * Returns length of opened file.
  * Value -1 means error.
  */
-inline long file_length_opened(FILE *fp)
+inline int32_t file_length_opened(FILE *fp)
 {
-    long length;
-    long lastpos;
+    int32_t length;
+    int32_t lastpos;
 
     if (fp == NULL)
       return -1;
@@ -102,9 +102,9 @@ inline long file_length_opened(FILE *fp)
 /**
  * Reads 4-byte little-endian number from given buffer.
  */
-inline long read_int32_le_buf(const unsigned char *buff)
+inline int32_t read_int32_le_buf(const unsigned char *buff)
 {
-    long l;
+    int32_t l;
     l = buff[0];
     l += buff[1]<<8;
     l += buff[2]<<16;
@@ -214,7 +214,7 @@ int load_command_line_options(ProgramOptions &opts, int argc, char *argv[])
     return true;
 }
 
-short show_head(void)
+int16_t show_head(void)
 {
     printf("\n%s (%s) %s\n",PROGRAM_FULL_NAME,PROGRAM_NAME,VER_STRING);
     printf("  Created by %s; %s\n",PROGRAM_AUTHORS,LEGAL_COPYRIGHT);
@@ -223,7 +223,7 @@ short show_head(void)
 }
 
 /** Displays information about how to use this tool. */
-short show_usage(const std::string &fname)
+int16_t show_usage(const std::string &fname)
 {
     std::string xname = file_name_strip_path(fname.c_str());
     printf("usage:\n");
@@ -234,7 +234,7 @@ short show_usage(const std::string &fname)
     return ERR_OK;
 }
 
-short load_inp_sample_file(SoundData& snd, const SoundFile& inp, ProgramOptions& opts)
+int16_t load_inp_sample_file(SoundData& snd, const SoundFile& inp, ProgramOptions& opts)
 {
     snd.fname = inp.fname;
     snd.data.resize(0);
@@ -256,7 +256,7 @@ short load_inp_sample_file(SoundData& snd, const SoundFile& inp, ProgramOptions&
         fclose(smpfile);
         return ERR_BAD_FILE;
     }
-    unsigned long riff_len = read_int32_le_buf(header+4);
+    uint32_t riff_len = read_int32_le_buf(header+4);
     // Get file size
     size_t len = file_length_opened(smpfile);
     // Compare it with size from header
@@ -288,7 +288,7 @@ short load_inp_sample_file(SoundData& snd, const SoundFile& inp, ProgramOptions&
     return ERR_OK;
 }
 
-short save_dat_file(WorkingSet& ws, std::vector<SoundData>& snds, const std::string& fname_out, ProgramOptions& opts)
+int16_t save_dat_file(WorkingSet& ws, std::vector<SoundData>& snds, const std::string& fname_out, ProgramOptions& opts)
 {
     std::vector<SoundBankSample> samples;
     // Sound banks have footer instead of header
@@ -308,7 +308,7 @@ short save_dat_file(WorkingSet& ws, std::vector<SoundData>& snds, const std::str
             samples[0].data = 0;
         }
         // Write sound samples
-        long base_pos = ftell(sbfile);
+        int32_t base_pos = ftell(sbfile);
         for (int i = 0; i < snds.size(); i++)
         {
             SoundData &snd = snds[i];

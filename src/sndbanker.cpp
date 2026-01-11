@@ -26,6 +26,7 @@
 #include <cmath>
 #include <fstream>
 #include <sstream>
+#include <cstdint>
 
 #include "prog_options.h"
 #include "sndbanker_version.h"

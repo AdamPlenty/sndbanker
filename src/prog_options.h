@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <cstdio>
+#include <cstdint>
 
 extern int verbose;
 
@@ -28,9 +29,9 @@ public:
     std::string fname;
     std::vector<unsigned char> data;
     /** Unknown1. */
-    long unkn1;
+    int32_t unkn1;
     /** Unknown3. */
-    long sfxid;
+    int32_t sfxid;
 };
 
 #pragma pack(1)
@@ -42,7 +43,7 @@ public:
     /** Offset of the sample data in DAT file. */
     size_t data;
     /** Unknown1. */
-    long unkn1;
+    int32_t unkn1;
     /** Size of the sample file. */
     size_t length;
     /** SFX ID. */
@@ -54,19 +55,19 @@ public:
 class SoundBankHead {
 public:
   unsigned char field_0[14];
-  unsigned long field_E;
+  uint32_t field_E;
 };
 
 class SoundBankEntry {
 public:
     /** Offset of the first catalog entry in DAT file. */
-    unsigned long field_0;
+    uint32_t field_0;
     /** Offset to the sample data area. */
-    unsigned long field_4;
+    uint32_t field_4;
     /** Size of the sample catalog in DAT file. */
-    unsigned long field_8;
+    uint32_t field_8;
     /** Offset of the first catalog entry in DAT file. */
-    unsigned long field_C;
+    uint32_t field_C;
 };
 
 class SoundBankFoot {

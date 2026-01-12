@@ -41,11 +41,11 @@ public:
     /** Name of the sound file the sample comes from. */
     char fname[SAMPLE_FNAME_LEN];
     /** Offset of the sample data in DAT file. */
-    size_t data;
+    uint32_t data;
     /** Unknown1. */
     int32_t unkn1;
     /** Size of the sample file. */
-    size_t length;
+    uint32_t length;
     /** SFX ID. */
     unsigned char sfxid;
     /** Unknown3. */
@@ -75,12 +75,12 @@ public:
     /** Block 0x00 filled */
     char unkn7[16];
     /** Offset of the first catalog entry in DAT file. */
-    size_t start3;
+    uint32_t start3;
     /** Size of the catalog in DAT file. */
-    size_t catsize3;
+    uint32_t catsize3;
     char unkn8[48];
     /** Offset of the footer in DAT file. */
-    size_t footpos;
+    uint32_t footpos;
 };
 
 #pragma pack()
